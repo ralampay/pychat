@@ -5,6 +5,8 @@ OPENAI_API_KEY = "OPENAI_API_KEY"
 
 
 def main():
+    max_tokens = 4000
+
     print("PyChat v0.1")
 
     openai_api_key = os.getenv(OPENAI_API_KEY)
@@ -21,7 +23,7 @@ def main():
         print("You did not enter any prompt.")
     else:
         completion = openai.Completion.create(
-            engine="text-davinci-003", prompt=query, max_tokens=4000
+            engine="text-davinci-003", prompt=query, max_tokens=max_tokens
         )
 
         output = completion.choices[0].text
