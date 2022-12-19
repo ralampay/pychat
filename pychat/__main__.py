@@ -1,7 +1,8 @@
 import openai
 import os
 
-OPENAI_API_KEY='OPENAI_API_KEY'
+OPENAI_API_KEY = "OPENAI_API_KEY"
+
 
 def main():
     openai_api_key = os.getenv(OPENAI_API_KEY)
@@ -11,13 +12,21 @@ def main():
         exit(-1)
 
     print("PyChat v0.1")
-    query = input('Input: ')
 
-    completion = openai.Completion.create(engine='text-davinci-003', prompt=query, max_tokens=4000)
+    query = input("Input: ")
 
-    output = completion.choices[0].text
+    if query != "":
 
-    print("Output: {}".format(output))
+        completion = openai.Completion.create(
+            engine="text-davinci-003", prompt=query, max_tokens=4000
+        )
 
-if __name__ == '__main__':
+        output = completion.choices[0].text
+
+        print("Output: {}".format(output))
+    else:
+        print("You did not enter any prompt.")
+
+
+if __name__ == "__main__":
     main()
