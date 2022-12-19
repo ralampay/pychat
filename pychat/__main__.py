@@ -20,8 +20,8 @@ def main():
     print("max_tokens: {}".format(max_tokens))
     print("engine: {}".format(engine))
 
-    counter = 1
-    while counter != 2:
+    counter = 0
+    while counter != 1:
         openai_api_key = os.getenv(OPENAI_API_KEY)
 
         if openai_api_key == None:
