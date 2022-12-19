@@ -31,7 +31,7 @@ def main():
 
     #query = input("Input: ")
 
-    while(query != 'quit'):
+    while query != 'quit':
         test_input = query.strip()
         
         if test_input == '':
