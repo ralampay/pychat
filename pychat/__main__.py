@@ -28,7 +28,7 @@ def main():
             print("OPENAI_API_KEY required")
             exit(-1)
 
-        query = input("Ask me a question[or type quit to exit]: ")
+        query = input("Enter a question or type quit to exit: ")
 
         test_input = query.strip()
 
