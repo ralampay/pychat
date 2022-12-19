@@ -1,13 +1,24 @@
 import openai
 import os
+import argparse
 
 OPENAI_API_KEY = "OPENAI_API_KEY"
 
 
 def main():
-    max_tokens = 4000
+    parser = argparse.ArgumentParser(description="PyChat v0.1")
 
-    print("PyChat v0.1")
+    parser.add_argument("--max-tokens", help="Maximum size of tokens to be used", type=int, default=4000)
+    parser.add_argument("--engine", help="The openai engine to use", type=str, default='text-davinci-003')
+
+    args = parser.parse_args()
+
+    max_tokens  = args.max_tokens
+    engine      = args.engine
+
+    print("Options:")
+    print("max_tokens: {}".format(max_tokens))
+    print("engine: {}".format(engine))
 
     openai_api_key = os.getenv(OPENAI_API_KEY)
 
@@ -23,7 +34,7 @@ def main():
         print("You did not enter any prompt.")
     else:
         completion = openai.Completion.create(
-            engine="text-davinci-003", prompt=query, max_tokens=max_tokens
+            engine=engine, prompt=query, max_tokens=max_tokens
         )
 
         if len(completion.choices) == 0:
