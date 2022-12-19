@@ -15,8 +15,11 @@ def main():
 
     query = input("Input: ")
 
-    if query != "":
+    test_input = query.strip()
 
+    if test_input == '':
+        print("You did not enter any prompt.")
+    else:
         completion = openai.Completion.create(
             engine="text-davinci-003", prompt=query, max_tokens=4000
         )
@@ -24,8 +27,6 @@ def main():
         output = completion.choices[0].text
 
         print("Output: {}".format(output))
-    else:
-        print("You did not enter any prompt.")
 
 
 if __name__ == "__main__":
