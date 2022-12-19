@@ -51,9 +51,9 @@ def main():
 
                 print("Output: {}".format(output))
 
-        query = input("Input ('quit' to exit): ")
+        query = input("\nInput ('quit' to exit): ")
         
-    print('Thank you for using PyChat!')
+    print('\nThank you for using PyChat!')
 
 if __name__ == "__main__":
     main()
