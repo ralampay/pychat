@@ -31,25 +31,29 @@ def main():
 
     #query = input("Input: ")
 
-    test_input = query.strip()
-
-    if test_input == '':
-        print("You did not enter any prompt.")
-    else:
-        completion = openai.Completion.create(
-            engine=engine, prompt=query, max_tokens=max_tokens
-        )
-
-        if len(completion.choices) == 0:
-
-            print("No output")
+    while(query != 'quit'):
+        test_input = query.strip()
         
+        if test_input == '':
+            print("You did not enter any prompt.")
         else:
+            completion = openai.Completion.create(
+                engine=engine, prompt=query, max_tokens=max_tokens
+            )
 
-            output = completion.choices[0].text
+            if len(completion.choices) == 0:
 
-            print("Output: {}".format(output))
+                print("No output")
+            
+            else:
 
+                output = completion.choices[0].text
+
+                print("Output: {}".format(output))
+
+        query = input("Input ('quit' to exit): ")
+        
+    print('Thank you for using PyChat!')
 
 if __name__ == "__main__":
     main()
