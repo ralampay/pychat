@@ -1,66 +1,72 @@
 import openai
 import os
-import argparse
+from argparse import ArgumentParser
 
-OPENAI_API_KEY = "OPENAI_API_KEY"
+OPEN_API_KEY = "OPENAI_API_KEY"
+
 
 def main():
-    global query
-    global max_tokens
 
-    parser = argparse.ArgumentParser(description="PyChat v0.1")
-    
-    parser.add_argument("--max-tokens", help="Maximum size of tokens to be used", type=int, default=4000)
-    parser.add_argument("--engine", help="The openai engine to use", type=str, default="text-davinci-003")
-    parser.add_argument("--query", help="Checking for user input", type=str, default="write a conversational greetings and then ask how you can help")
+    # Parameterizing arguments from the command line
+    parser = ArgumentParser(description="Pychat v0.1")
+    # max-tokens is the flag
+    parser.add_argument(
+        "--max-tokens", help="Maximum size of tokes used", type=int, default=4000
+    )
+    # flag for engine
+    parser.add_argument(
+        "--engine",
+        help="The openai engine to use",
+        type=str,
+        default="text-davinci-003",
+    )
+
+    # flag for query from user
+    parser.add_argument(
+        "--query", help="A string input from the user", type=str, required=True
+    )
+
+    # parsing the arguments
 
     args = parser.parse_args()
 
-    max_tokens  = args.max_tokens
-    engine      = args.engine
-    query       = args.query
+    max_tokens = args.max_tokens
+    engine = args.engine
+    query = args.query
 
-    print("\nOptions: ")
-    print(f"max_tokens: {max_tokens}")
-    print(f"engine: {engine}")
+    print("Options:")
+    print(f"Max tokens: {max_tokens}")
+    print(f"Engine: {engine}")
 
-    openai_api_key = os.getenv(OPENAI_API_KEY)
+    open_ai_api_key = os.getenv(OPEN_API_KEY)
 
-    if openai_api_key == None:
+    if open_ai_api_key == None:
         print("OPENAI_API_KEY required")
         exit(-1)
 
-    # put line34 in comment as there's already an assigned default 'query' value
-    # query = query.strip()
+    query = query.strip()
 
-    o_quit = False
-    # while True:
-    while not o_quit:
-
-        open_ai(query)
-        query = input("User Input: [or type 'quit' to exit]: ")
-        query = query.strip()
-
-        if query.lower() == 'quit':
-            query = "give a closing statement to a user"
-            open_ai(query)
-            o_quit = True
+    while True:
+        if query.lower() == "quit":
+            print("\nGoodbye! Come again anytime.")
             break
-
-        elif query == '':
-            query = "write a reply that an input was not found or maybe the customer did not provide one and ask to re-enter how can I help"
-
-
-def open_ai(query):
-        completion = openai.Completion.create(
-            engine="text-davinci-003", prompt=query, max_tokens=max_tokens
-        )
-
-        if len(completion.choices) == 0:
-            print("No output")
+        elif query == "":
+            print("You did not ask me anything.")
+            query = input("You (type 'quit' to exit): \n")
         else:
-            output = completion.choices[0].text
-            print("ai response: ", format(output))
+            completion = openai.Completion.create(
+                engine=engine, prompt=query, max_tokens=max_tokens
+            )
+
+            if len(completion.choices) == 0:
+                print("No output")
+            else:
+                output = completion.choices[0].text
+                print(f"AI: {output.strip()}")
+
+            query = input("\nYou (type 'quit' to exit): \n")
+            query = query.strip()
+
 
 if __name__ == "__main__":
     main()
