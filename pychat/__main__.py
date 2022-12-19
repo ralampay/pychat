@@ -24,9 +24,15 @@ def main():
             engine="text-davinci-003", prompt=query, max_tokens=4000
         )
 
-        output = completion.choices[0].text
+        if len(completion.choices) == 0:
 
-        print("Output: {}".format(output))
+            print("No output")
+        
+        else:
+
+            output = completion.choices[0].text
+
+            print("Output: {}".format(output))
 
 
 if __name__ == "__main__":
