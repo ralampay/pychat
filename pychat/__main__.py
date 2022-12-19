@@ -49,7 +49,6 @@ def main():
 
         elif query == '':
             query = "write a reply that an input was not found or maybe the customer did not provide one and ask to re-enter how can I help"
-            #query = "write a reply in context that an input was not found or maybe the customer did not provide one and ask to re-enter how can I help"
 
 
 def open_ai(query):
@@ -62,7 +61,6 @@ def open_ai(query):
         else:
             output = completion.choices[0].text
             print("ai response: ", format(output))
-
 
 if __name__ == "__main__":
     main()
