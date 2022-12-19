@@ -19,8 +19,8 @@ def main():
     query       = args.query
 
     print("\nOptions: ")
-    print("max_tokens: {}".format(max_tokens))
-    print("engine: {}".format(engine))
+    print(f"max_tokens: {max_tokens}")
+    print(f"engine: {engine}")
 
     openai_api_key = os.getenv(OPENAI_API_KEY)
 
