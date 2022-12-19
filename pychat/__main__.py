@@ -32,23 +32,23 @@ def main():
 
     while True:
         if query.lower() == 'quit':
-            print("Thank you for using PyChat!")
+            print("\nThank you for using PyChat!")
             break
         elif query == '':
             print("You did not enter any prompt.")
-            query = input("Please enter a prompt: ")
+            query = input("You (type 'quit' to exit): \n")
         else:
             completion = openai.Completion.create(
-                engine="text-davinci-003", prompt=query, max_tokens=max_tokens
+                engine=engine, prompt=query, max_tokens=max_tokens
             )
 
             if len(completion.choices) == 0:
                 print("No output")
             else:
                 output = completion.choices[0].text
-                print(format(output))
+                print('\nAI:\n' + format(output.strip()))
 
-            query = input("Prompt [or type 'quit' to exit]: ")
+            query = input("\nYou (type 'quit' to exit): \n")
             query = query.strip()
 
 if __name__ == "__main__":
