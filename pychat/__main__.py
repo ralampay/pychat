@@ -10,7 +10,7 @@ def main():
 
     parser.add_argument("--max-tokens", help="Maximum size of tokens to be used", type=int, default=4000)
     parser.add_argument("--engine", help="The openai engine to use", type=str, default='text-davinci-003')
-    parser.add_argument("--query", help="checking for user input", type=str, required=True)
+    parser.add_argument("--query", help="Provide user input", type=str, required=True)
 
     args = parser.parse_args()
 
@@ -31,24 +31,28 @@ def main():
 
     #query = input("Input: ")
 
-    test_input = query.strip()
+    while(query != 'quit'):
+        test_input = query.strip()
 
-    if test_input == '':
-        print("You did not enter any prompt.")
-    else:
-        completion = openai.Completion.create(
-            engine=engine, prompt=query, max_tokens=max_tokens
-        )
-
-        if len(completion.choices) == 0:
-
-            print("No output")
-        
+        if test_input == '':
+            print("You did not enter any prompt.")
         else:
+            completion = openai.Completion.create(
+                engine=engine, prompt=query, max_tokens=max_tokens
+            )
 
-            output = completion.choices[0].text
+            if len(completion.choices) == 0:
 
-            print("Output: {}".format(output))
+                print("No output")
+            
+            else:
+
+                output = completion.choices[0].text
+
+                print("Output: {}".format(output))
+        
+        print('-'*70)
+        query = input('\nInput: ')
 
 
 if __name__ == "__main__":
