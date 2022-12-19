@@ -36,7 +36,7 @@ def main():
             print("You did not enter any prompt.")
         elif test_input == 'quit':
             counter += 1
-            print("okay bye")
+            print("ok bye. Hope too see you soon")
         else:
             completion = openai.Completion.create(
             engine=engine, prompt=query, max_tokens=max_tokens
