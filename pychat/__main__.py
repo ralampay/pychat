@@ -33,7 +33,7 @@ def main():
 
     while(query != 'quit'):
         test_input = query.strip()
-
+        
         if test_input == '':
             print("You did not enter any prompt.")
         else:
@@ -42,18 +42,15 @@ def main():
             )
 
             if len(completion.choices) == 0:
-
                 print("No output")
-            
             else:
-
                 output = completion.choices[0].text
-
                 print("Output: {}".format(output))
-        
-        print('-'*70)
-        query = input('\nInput: ')
 
+        print('-'*70)
+        query = input("\nInput ('quit' to exit): ")
+        
+    print('\nThank you for using PyChat!')
 
 if __name__ == "__main__":
     main()
