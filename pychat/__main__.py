@@ -10,12 +10,12 @@ def main():
 
     parser.add_argument("--max-tokens", help="Maximum size of tokens to be used", type=int, default=4000)
     parser.add_argument("--engine", help="The openai engine to use", type=str, default='text-davinci-003')
-
+    parser.add_argument("--query",help="Checking for user input",type=str,required=True)
     args = parser.parse_args()
 
     max_tokens  = args.max_tokens
     engine      = args.engine
-
+    query       = args.query
     print("Options:")
     print("max_tokens: {}".format(max_tokens))
     print("engine: {}".format(engine))
@@ -26,7 +26,6 @@ def main():
         print("OPENAI_API_KEY required")
         exit(-1)
 
-    query = input("Input: ")
 
     test_input = query.strip()
 
